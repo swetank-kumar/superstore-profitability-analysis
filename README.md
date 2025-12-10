@@ -104,7 +104,9 @@ ETL logic applied to create analytics-ready data:
 ---
 
 ## 📸 Dashboard Screenshots
-- **Executive Overview:** KPIs, regional performance, and trends
-- **Profitability Details:** Discount impact and product risk analysis
+### Executive Overview
+![Executive Dashboard](./Visuals/1.Overview.png)
 
+### Profitability Details
+![Profitability Diagnostics](./Visuals/2.Details.png)
 ---
