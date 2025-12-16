@@ -1,52 +1,52 @@
-# Superstore Sales & Profitability Dashboard 📊
+# End-to-End Superstore Sales & Profitability Analysis 📊
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/swetank-jha)
 
 ## 🚀 Project Overview
 The Superstore is experiencing strong revenue growth but inconsistent profitability.  
-This project analyzes **where profit is generated, where it is lost, and why**, focusing on discounting behavior, product mix, customer segments, and regional performance.
+This project is a **full-lifecycle BI solution** that analyzes **where profit is generated, where it is lost, and why**. It moves beyond simple reporting to provide diagnostic insights on discounting behavior, product mix, and regional performance.
 
-The dashboard is designed for **business decision-makers**, providing both an executive overview and a detailed diagnostic view.
+The solution is designed for **business decision-makers**, providing both an executive overview and a detailed diagnostic view using a robust backend architecture.
 
 ---
 
 ## 🛠 Tech Stack & Architecture
 
-**Database**
-- MySQL (ETL, feature engineering, data type enforcement)
+**Database & ETL**
+- **MySQL:** Used for data ingestion, cleaning, and type enforcement (ETL).
+- **SQL (DDL/DML):** Feature engineering and creating the relational structure.
 
 **Data Modeling**
-- Star Schema (Fact Table + Date Dimension)
+- **Star Schema:** Optimized Fact/Dimension model to ensure high performance in Power BI.
+- **Data Quality (DQ):** Handling nulls, distinct counts, and standardizing date formats.
 
 **Visualization**
-- Power BI
-
-**Languages**
-- DAX (Measures & KPIs)
-- SQL (DDL/DML)
+- **Power BI:** Dashboard development and interactive reporting.
+- **DAX:** Complex measures (CALCULATE, Time Intelligence) for KPI logic.
 
 **Architecture**
-- Decoupled Pipeline: **SQL Backend → Staged CSV → Power BI**
+- Decoupled Pipeline: **Raw Data → SQL Staging → Cleaned Production Tables → Power BI**
 
 ---
 
 ## ⚙️ The Data Pipeline (End-to-End Workflow)
 
-This project simulates a real-world Business Intelligence workflow, moving from raw data to actionable insights.
+This project simulates a real-world Business Intelligence workflow, ensuring data integrity before visualization.
 
-### 1️⃣ Data Staging & Ingestion (MySQL)
-- Raw sales data imported into a staging table (`raw_superstore_data`)
-- Initial inconsistencies handled (text-based dates, numeric values stored as strings)
-- Strict schema designed for the final table to enforce correct data types
+### 1️⃣ Data Staging & Quality Checks (MySQL)
+- Imported raw sales data into a staging table (`raw_superstore_data`).
+- **Data Quality Audit:** Identified and fixed inconsistencies (e.g., text-based dates, numeric values stored as strings).
+- **Type Enforcement:** Designed a strict schema to prevent bad data from entering the reporting layer.
 
-### 2️⃣ Feature Engineering (SQL)
+### 2️⃣ Feature Engineering & Transformation
 ETL logic applied to create analytics-ready data:
-- **Profit Status:** Flagged orders as Profit or Loss
-- **Unit Price & Margin %:** Calculated at row level for accuracy
-- **Date Standardization:** Unified formats into SQL `DATE` type
+- **Profit Status Logic:** Categorized orders as 'Profit', 'Loss', or 'Neutral' at the database level.
+- **Metric Calculation:** Calculated `Unit Price` and `Margin %` row-by-row to avoid aggregation errors.
+- **Date Standardization:** Unified formats into SQL `DATE` type for accurate Time Intelligence analysis.
 
 ### 3️⃣ Visualization Layer (Power BI)
-- Power BI connected only to the cleaned dataset
-- Star Schema implemented with a dedicated Date dimension
-- Reusable DAX measures created for:
+- Connected Power BI to the **Star Schema** (Fact + Dimensions) rather than a flat file.
+- **Performance Optimization:** Minimized calculated columns by moving logic to SQL/Power Query.
+- **KPIs Created:**
   - Revenue YoY %
   - Weighted Margin %
   - Loss Order %
@@ -57,49 +57,49 @@ ETL logic applied to create analytics-ready data:
 ## 📊 Dashboard Structure
 
 ### Page 1: Executive Overview
-**Purpose:** High-level performance monitoring for leadership
+**Purpose:** High-level performance monitoring for leadership.
 
 **Key Visuals**
-- KPI Cards: Total Sales, Total Profit,Total Order, Avg Order Value, Revenue YoY %
-- Sales & Profit Trend 
-- Sales vs Profit by Region
-- Profit Contribution by Customer Segment
+- **KPI Cards:** Total Sales, Profit, Orders, AOV, and YoY Growth.
+- **Trend Analysis:** Sales vs. Profit over time.
+- **Regional Performance:** Map and bar charts identifying high-value regions.
+- **Segment Analysis:** Profit contribution by Consumer, Corporate, and Home Office.
 
 **Key Business Questions**
 - Are we growing year-over-year?
-- Are we profitable despite revenue growth?
-- Which regions and customer segments drive profit?
+- Is revenue growth translating into actual profit?
+- Which regions are underperforming?
 
 ---
 
 ### Page 2: Profitability Diagnostics
-**Purpose:** Root cause analysis
+**Purpose:** Root cause analysis for operational teams.
 
 **Key Visuals**
-- Discount vs Profit Scatter Plot (Pricing Strategy)
-- Sub-Category Profitability Matrix (Product Risk)
-- Top 10 Customers by Profit
-- Loss Order % by Category
+- **Discount vs. Profit Scatter Plot:** Identifies the "break-even" discount threshold.
+- **Product Matrix:** Sub-category analysis (Table vs. Matrix) to spot loss-makers.
+- **Loss Analysis:** Percentage of loss-making orders by category.
+- **Customer Insights:** Top 10 Customers by Profit vs. Revenue.
 
 **Key Business Questions**
 - At what discount level do we start losing money?
-- Which specific products are destroying margins?
-- How much  risk exists in current sales strategies?
+- Which specific products (e.g., Tables) are destroying margins?
+- How much operational risk exists in our current discounting strategy?
 
 ---
 
 ## 🔍 Key Insights & Outcomes
-- **The 20% Rule:** Discounts above ~20% consistently result in negative margins
-- **Product Mix Issues:** Tables and Bookcases are primary loss drivers
-- **Operational Risk:** ~19% of orders are loss-making
+- **The 20% Rule:** Discounts above ~20% consistently result in negative margins across all categories.
+- **Product Mix Issues:** 'Tables' and 'Bookcases' are primary loss drivers, often sold at deep discounts.
+- **Operational Risk:** Approximately **19% of all orders** are loss-making, indicating a need for stricter pricing controls.
 
 ---
 
 ## 💡 Business Recommendations
-1. Introduce approval controls for discounts above 15–20%
-2. Reprice loss-making sub-categories
-3. Track Loss Order % as a primary risk KPI
-4. Focus retention and pricing on high-profit segments
+1. **Pricing Governance:** Introduce approval workflows for discounts above 15–20%.
+2. **Catalog Optimization:** Reprice or bundle loss-making sub-categories (Tables).
+3. **Risk Monitoring:** Track "Loss Order %" as a primary risk KPI in monthly reviews.
+4. **Targeting:** Focus retention efforts on the high-margin "Corporate" segment.
 
 ---
 
@@ -110,3 +110,17 @@ ETL logic applied to create analytics-ready data:
 ### Profitability Details
 ![Profitability Diagnostics](./Visuals/2.Details.png)
 ---
+
+## 📐 Data Model (Star Schema)
+To optimize performance and simplify DAX calculations, I designed a **Star Schema** rather than using a flat table.
+
+**Schema Details:**
+- **Fact Table:** `Fact_Sales` (Contains quantitative data: Sales, Profit, Quantity)
+- **Dimension Tables:** `Dim_Customer`, `Dim_Product`, `Dim_Location`, `Dim_Date`
+- **Relationships:** 1-to-Many (1:*) relationships connected via surrogate keys.
+
+![Star Schema Data Model](./Visuals/3.Data_Model.png)
+
+---
+👤 Author
+Created by [Swetank Kumar Jha](https://www.linkedin.com/in/swetank-jha)
