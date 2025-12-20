@@ -123,4 +123,4 @@ To optimize performance and simplify DAX calculations, I designed a **Star Schem
 
 ---
 👤 Author
-Created by [Swetank Kumar Jha](https://www.linkedin.com/in/swetank-jha)
+Swetank Kumar Jha (https://www.linkedin.com/in/swetank-jha)
